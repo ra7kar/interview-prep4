@@ -1,5 +1,5 @@
 # implement a binary tree
-# thanks to JV for the display the tree function 
+# thanks to JV for the display tree code 
 # https://stackoverflow.com/revisions/54074933/1
 
 # Node class for the binary tree
