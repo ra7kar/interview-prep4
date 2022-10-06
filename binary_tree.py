@@ -1,4 +1,6 @@
 # implement a binary tree
+# thanks to JV for the display the tree function 
+# https://stackoverflow.com/revisions/54074933/1
 
 # Node class for the binary tree
 class Node:
@@ -6,7 +8,6 @@ class Node:
         self.val = val
         self.left = None
         self.right = None
-
         self.height = 0
 
     def __str__(self):
@@ -131,6 +132,6 @@ class BinaryTree:
 
 if __name__ == "__main__":
 
-    bt = BinaryTree([4,3,2,1,6,7,8,5])
+    bt = BinaryTree([4,2,1,3,6,5,7])
     print(bt)
     print(bt.root)
