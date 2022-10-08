@@ -1,0 +1,81 @@
+# given queens position get the valid moves 
+
+# lets implement with the TDD approach.
+
+import unittest
+from numpy.testing._private.parameterized import parameterized
+from pytest import param
+from abc import ABC, abstractmethod
+
+class TestQueen(unittest.TestCase):
+    @parameterized.expand([
+        ((4,4), 27),
+        ((3,5), 25),
+    ])
+    def test_queen_moves(self, input, result):
+        queen = Queen(input[0],input[1])
+        self.assertEquals(queen.get_valid_moves(), result, "test1")
+
+class ChessPieces(ABC):
+    def __init__(self, row, col) -> None:
+        # check inputs
+        if row > 8 or row < 1:
+            raise ValueError(f"row out of bound,  {row}")
+        if col > 8 or col < 1:
+            raise ValueError(f"col out of bound,  {col}")
+
+        self.row = row
+        self.col = col
+
+    def get_position(self):
+        return (self.row, self.col)
+
+    @abstractmethod
+    def get_valid_moves(self):
+        raise NotImplemented
+
+    @property
+    def name(self):
+        return type(self.__name__)
+
+def is_valid_position(row, col):
+    #check if row and col are within the board
+    if row > 8 or row < 1:
+        return False
+    if col > 8 or col < 1:
+        return False
+
+    return True
+
+class Queen(ChessPieces):
+
+    def get_valid_moves(self):
+
+        row, col = self.get_position()
+        valid_moves = [ ]
+
+        for r_shift in [-1, 0, 1]:
+            for c_shift in [-1, 0, 1]:
+                
+                if r_shift == 0 and c_shift == 0:
+                    continue
+                new_row, new_col = row, col
+
+                while is_valid_position(new_row, new_col):
+                    
+                    if new_row != row or new_col != col :
+                        valid_moves.append((new_row, new_col))
+
+                    new_row += r_shift
+                    new_col += c_shift
+
+        # valid_moves has all the positions the queen can move, for our test case we will 
+        # return the length which is the count of moves
+        return len(valid_moves)
+
+
+if __name__ == "__main__":
+    unittest.main()
+
+
+
