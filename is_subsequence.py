@@ -5,7 +5,6 @@
 # lets implement with the TDD approach, Test driven development
 
 import unittest
-from numpy import s_
 from numpy.testing._private.parameterized import parameterized
 
 class TestIsSubsequence(unittest.TestCase):
