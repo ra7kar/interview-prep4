@@ -16,10 +16,13 @@ from numpy.testing._private.parameterized import parameterized
 
 class TestPalindrome(unittest.TestCase):
     @parameterized.expand([
-        ('racecar' , 'racecar'),
-        ('aba', 'aba'),
-        ('abba', 'abba'),
-        ('abbacsfs', 'abba'),
+        # ('racecar' , 'racecar'),
+        # ('aba', 'aba'),
+        # ('abba', 'abba'),
+        # ('abbacsfs', 'abba'),
+        # ("babad", "bab"),
+        ("ac", 'a'),
+        
     ])
     
     def test_palindrome(self, string, result):
@@ -33,28 +36,28 @@ def find_palindromic_string(s):
     res_len = 0
     # we will used left and right pointers
     # loop through the string
-    for i in range(len(s)):
-        if len(s) % 2 != 0:
-            # odd string length
-            left = right = i
-            while left >= 0 and right < len(s) and s[left] == s[right]:
-                if res_len < len(s[left:right+1]):
-                    res = s[left:right+1]
-                    res_len = len(res)
 
-                left -= 1
-                right += 1
-        else:
-            # even string length
-            left = i
-            right = i+1
-            while left >= 0 and right < len(s) and s[left] == s[right]:
-                if len(s[left:right+1]) > res_len:
-                    res = s[left:right+1]
-                    res_len = len(res)
-                
-                left -= 1
-                right += 1
+    for i in range(len(s)):
+        # odd string length
+        left = right = i
+        while left >= 0 and right < len(s) and s[left] == s[right]:
+            if res_len < len(s[left:right+1]):
+                res = s[left:right+1]
+                res_len = len(res)
+
+            left -= 1
+            right += 1
+        
+        # even string length
+        left = i
+        right = i+1
+        while left >= 0 and right < len(s) and s[left] == s[right]:
+            if len(s[left:right+1]) > res_len:
+                res = s[left:right+1]
+                res_len = len(res)
+            
+            left -= 1
+            right += 1
 
         
     return res
